@@ -1,13 +1,13 @@
 # projectid1110
 
-project title:
+Project title:
 
 
 
-group participants:
-Mouhamad sayif
+Group participants:
+Mouhamad Sayif
 Nalan S
-siriki sai tejeshwar
+Siriki Sai Tejeshwar
 
-project details:
+Project details:
 ........
