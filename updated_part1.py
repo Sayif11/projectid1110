@@ -67,7 +67,7 @@ for index,entry in enumerate(collection['text']):
 
 # preparing for train and test
 Train_X, Test_X, Train_Y, Test_Y = model_selection.train_test_split(
-    collection['text_final'],collection['label'],test_size=0.2)
+    collection['text_final'],collection['label'],test_size=0.2,random_state=1)
 
 # word vectorization
 word_vector=TfidfVectorizer(max_features=5000)
