@@ -113,6 +113,17 @@ for index,entry in enumerate(collection_test['text']):
             Final_words.append(word_Final)
     # The final processed set of words for each iteration will be stored in 'text_final'
     collection_test.loc[index,'text_final'] = str(Final_words)
+    
+# word vectorization
+Test_X=collection_test['text_final']
+word_vector_test=TfidfVectorizer(max_features=5000)
+word_vector_test.fit(Test_X)
+Test_X=word_vector.transform(Test_X)
+print(word_vector_test.vocabulary_)
+
+lable_prediction=SVM.predict(Test_X)
+result=pd.DataFrame({'id': collection_test['id'],'label':lable_prediction})
+result.to_csv('submit.csv',index=False)
 
 
 
