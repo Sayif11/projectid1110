@@ -16,13 +16,17 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 import csv
 
+# Reading the news dataset from a CSV file
 news_dataset = pd.read_csv(r"C:/Users/rohit/Downloads/train.csv")
 
+# Checking for missing values in the dataset and fill them with empty string 
 news_dataset.isnull().sum()
 news_dataset = news_dataset.fillna('')
 
+# For combining 'author' and 'title' columns to creat the 'content' column
 news_dataset['content'] = news_dataset['author']+' '+news_dataset['title']
 
+# To separate features (x) and lables(y)
 X = news_dataset.drop(columns='label', axis=1)
 Y = news_dataset['label']
 print(X)
@@ -31,6 +35,7 @@ nltk.download('stopwords')
 
 port_stem = PorterStemmer()
 
+# Preaprocessing the function to clean the text content
 def preprocess(content):
     content = re.sub('[^a-zA-Z]',' ',content)
     content = content.lower()
@@ -39,16 +44,21 @@ def preprocess(content):
     content = ' '.join(content)
     return content
 
+# Applying preprocess to the 'content' column
 news_dataset['content'] = news_dataset['content'].apply(preprocess)
 
+# To obtain the preprocessed 'content' and label (Y) after preprocessing
 X = news_dataset['content'].values
 Y = news_dataset['label'].values
 
+# Creating a TF-IDF vectorizer to convert text into numerical features
 vectorizer = TfidfVectorizer()
 vectorizer.fit(X)
 
+# Converting the preprocessed text into TF-IDC features
 X = vectorizer.transform(X)
 
+# Spliting the dataset into training and testing sets
 X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.2, stratify=Y, random_state=1)
 
 from sklearn.ensemble import RandomForestClassifier
@@ -57,13 +67,16 @@ from sklearn.metrics import accuracy_score as acs
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+# Create a Random Forest Classifier
 rf = RandomForestClassifier(n_estimators=150, max_depth=None, n_jobs=-1)
 
+# Train the Random Forest model
 rf_model = rf.fit(X_train, Y_train)
 
+# Make predictions on the test set
 y_pred = rf_model.predict(X_test)
 
+# Calculating precision, recall, F1-Score and Accuracy
 precision, recall, fscore, train_support = score(Y_test, y_pred, pos_label=1, average='binary')
 print('Precision: {} / Recall: {} / F1-Score: {} / Accuracy: {}'.format(
     round(precision, 3), round(recall, 3), round(fscore,3), round(acs(Y_test,y_pred), 3)))
@@ -73,6 +86,8 @@ from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(Y_test, y_pred)
 class_label = [0, 1]
 df_cm = pd.DataFrame(cm, index=class_label,columns=class_label)
+
+# Ploting the confusion matrix
 sns.heatmap(df_cm, annot=True, fmt='d')
 plt.title("Confusion Matrix")
 plt.xlabel("Predicted Label")
