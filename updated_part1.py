@@ -12,8 +12,9 @@ from collections import defaultdict
 from nltk.corpus import wordnet as wn
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import model_selection, naive_bayes, svm
-from sklearn.metrics import accuracy_score
-
+from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay
+from sklearn import metrics
+import matplotlib.pyplot as plt
 
 
 import os
@@ -76,6 +77,16 @@ Test_X_word=word_vector.transform(Test_X)
 print(word_vector.vocabulary_)
 print(Train_X_word)
 
+# svm classifier
+SVM=svm.SVC(C=1.0,kernel='linear',gamma='auto')
+SVM.fit(Train_X_word,Train_Y)
+SVM_prediction=SVM.predict(Test_X_word)
+accuracy= accuracy_score(SVM_prediction, Test_Y)
+print("SVM Accuracy Score -> ",accuracy*100)
+cm=metrics.confusion_matrix(Test_Y,SVM_prediction)
+cm_display=ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=[False,True])
+cm_display.plot()
+plt.show()
 
 
 
