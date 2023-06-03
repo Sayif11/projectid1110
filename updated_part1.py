@@ -88,5 +88,31 @@ cm_display=ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=[False,True
 cm_display.plot()
 plt.show()
 
+#Preparing the test set for prediction
+collection_test= pd.read_csv('/home/nalan/Documents/data_sets/test.csv')
+
+#Geting punkt and wordnet
+import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('stopwords')
+collection_test['text'].dropna(inplace=True)
+collection_test['text'] = [str(entry).lower() for entry in collection_test['text']]
+collection_test['text']= [word_tokenize(str(entry)) for entry in collection_test['text']]
+for index,entry in enumerate(collection_test['text']):
+    # Declaring Empty List to store the words that follow the rules for this step
+    Final_words = []
+    # Initializing WordNetLemmatizer()
+    word_Lemmatized = WordNetLemmatizer()
+    # pos_tag function below will provide the 'tag' i.e if the word is Noun(N) or Verb(V) or something else.
+    for word, tag in pos_tag(entry):
+        # Below condition is to check for Stop words and consider only alphabets
+        if word not in stopwords.words('english') and word.isalpha():
+            word_Final = word_Lemmatized.lemmatize(word,tag_map[tag[0]])
+            Final_words.append(word_Final)
+    # The final processed set of words for each iteration will be stored in 'text_final'
+    collection_test.loc[index,'text_final'] = str(Final_words)
+
 
 
