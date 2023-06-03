@@ -35,6 +35,8 @@ print(y.head())
 
 print(y.value_counts())
 print(isinstance(collection['text'],(str)))
+collection['text']=collection['text'].str.lower()
+collection['text']=collection['text'].astype(str).apply(lambda x: word_tokenize(x) )
 print(collection['text'])
 
 
