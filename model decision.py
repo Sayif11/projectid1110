@@ -53,7 +53,7 @@ news_dataset['content'] = news_dataset['content'].apply(preprocess)
 X = news_dataset['content'].values
 Y = news_dataset['label'].values
 
-# converting the text data to numerical data
+# change string to float
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(X)
 
