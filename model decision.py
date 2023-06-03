@@ -58,7 +58,7 @@ vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(X)
 
 
-# function to plot the confusion matrix
+# show the confusion matrix
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
@@ -88,26 +88,26 @@ def plot_confusion_matrix(cm, classes,
     plt.xlabel('Predicted label')
 
 
-# splitting the dataset
+# preparing train and test
 X_train, X_test, Y_train, Y_test = train_test_split(
     X, Y, test_size=0.2, random_state=1
 )
 
 
-# Vectorizing and applying TF-IDF
+# word vectorization
 pipe = Pipeline([('model', DecisionTreeClassifier(criterion='entropy',
                                                   max_depth=20,
                                                   splitter='best',
                                                   random_state=42))])
 
-# training the model
+# model training
 model = pipe.fit(X_train, Y_train)
 
-# prediction for the test
+# test prediction
 prediction = model.predict(X_test)
 print("accuracy: ", accuracy_score(Y_test, prediction) * 100)
 
-# plotting the confusion matrix
+# show the confusion matrix
 
 cm = metrics.confusion_matrix(Y_test, prediction)
 plot_confusion_matrix(cm, classes=['Fake', 'Real'])
