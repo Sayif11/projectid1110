@@ -64,6 +64,17 @@ for index,entry in enumerate(collection['text']):
             Final_words.append(word_Final)
     collection.loc[index,'text_final'] = str(Final_words)
 
+# preparing for train and test
+Train_X, Test_X, Train_Y, Test_Y = model_selection.train_test_split(
+    collection['text_final'],collection['label'],test_size=0.2)
+
+# word vectorization
+word_vector=TfidfVectorizer(max_features=5000)
+word_vector.fit(collection['text_final'])
+Train_X_word=word_vector.transform(Train_X)
+Test_X_word=word_vector.transform(Test_X)
+print(word_vector.vocabulary_)
+print(Train_X_word)
 
 
 
