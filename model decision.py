@@ -1,3 +1,4 @@
+# importing the needed libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,7 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
-
+#
 nltk.download('stopwords')
 
 # reading the dataset to pandas
@@ -21,19 +22,17 @@ news_dataset.head()
 # checking the dimension of the data set
 news_dataset.shape
 
-# finding the sum of blank values in the data set
+# finding the sum of empty value aand filling them with empty string
 news_dataset.isnull().sum()
-
-# filling the spaces with empty string
 news_dataset = news_dataset.fillna('')
 
-# mixing the author and title part
+# concatanating the author and title part
 news_dataset['content'] = news_dataset['author'] + ' ' + news_dataset['title']
 
-# defining a function for the preprocessing of the text
 port_stem = PorterStemmer()
 
 
+# function for preproccesing of the words like lowercasing,removing stopwords etc.
 def preprocess(content):
     content = re.sub('[^a-zA-Z]', ' ', content)
     content = content.lower()
@@ -50,7 +49,7 @@ def preprocess(content):
 # applying the preprocess function to the dataset
 news_dataset['content'] = news_dataset['content'].apply(preprocess)
 
-# separating the content and the label
+# separating the content and the label-which gives the true or false value for the content 
 X = news_dataset['content'].values
 Y = news_dataset['label'].values
 
