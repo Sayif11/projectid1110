@@ -39,6 +39,15 @@ collection['text']=collection['text'].str.lower()
 collection['text']=collection['text'].astype(str).apply(lambda x: word_tokenize(x) )
 print(collection['text'])
 
+#Geting punkt and wordnet
+import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+collection['text'].dropna(inplace=True)
+collection['text']=[str(i).lower for i in collection['text']]
+collection['text']= [word_tokenize(str(i)) for i in collection['text']]
+
 
 
 
