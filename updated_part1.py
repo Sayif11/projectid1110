@@ -44,9 +44,25 @@ import nltk
 nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
+# removing blank, converting to lower case
+# and  tokenizing
 collection['text'].dropna(inplace=True)
 collection['text']=[str(i).lower for i in collection['text']]
 collection['text']= [word_tokenize(str(i)) for i in collection['text']]
+# creating default dictionary and assigning keys
+tag_map = defaultdict(lambda : wn.NOUN)
+tag_map['J'] = wn.ADJ
+tag_map['V'] = wn.VERB
+tag_map['R'] = wn.ADV
+
+for index,entry in enumerate(collection['text']):
+    Final_words = []
+    word_Lemmatized = WordNetLemmatizer()
+    for word, tag in pos_tag(entry):
+        if word not in stopwords.words('english') and word.isalpha():
+            word_Final = word_Lemmatized.lemmatize(word,tag_map[tag[0]])
+            Final_words.append(word_Final)
+    collection.loc[index,'text_final'] = str(Final_words)
 
 
 
