@@ -111,3 +111,4 @@ print("accuracy: ", accuracy_score(Y_test, prediction) * 100)
 
 cm = metrics.confusion_matrix(Y_test, prediction)
 plot_confusion_matrix(cm, classes=['Fake', 'Real'])
+plt.show()
