@@ -12,7 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
-#
+# downloading stopwords from nltk
 nltk.download('stopwords')
 
 # reading the dataset to pandas
@@ -32,7 +32,7 @@ news_dataset['content'] = news_dataset['author'] + ' ' + news_dataset['title']
 port_stem = PorterStemmer()
 
 
-# function for preproccesing of the words like lowercasing,removing stopwords etc.
+# function for preproccesing
 def preprocess(content):
     content = re.sub('[^a-zA-Z]', ' ', content)
     content = content.lower()
@@ -49,7 +49,7 @@ def preprocess(content):
 # applying the preprocess function to the dataset
 news_dataset['content'] = news_dataset['content'].apply(preprocess)
 
-# separating the content and the label-which gives the true or false value for the content 
+# separating the content and the label 
 X = news_dataset['content'].values
 Y = news_dataset['label'].values
 
