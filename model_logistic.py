@@ -11,7 +11,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn import metrics
 import itertools
+import nltk
 
+nltk.download('stopwords')
 # reading the dataset
 news_dataset = pd.read_csv('D:/semester 2/project id1110 s2/train.csv')
 news_dataset.head()
