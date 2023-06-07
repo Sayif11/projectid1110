@@ -12,7 +12,8 @@ from sklearn import model_selection, svm, metrics
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 
-# Download required NLTK resources
+# Download required NLTK modules
+
 nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
@@ -20,13 +21,15 @@ nltk.download('stopwords')
 
 np.random.seed(42)
 
-# Set the number of CPU cores to utilize for parallel processing
+# set CPU cores
+
 num_cores = os.cpu_count()
 
-# Load the data
+# inserting the data
+
 collection = pd.read_csv('/home/nalan/Documents/data_sets/train.csv')
 
-# Preprocess the data efficiently using parallel processing
+# Preprocess the data by parallel processing
 
 
 def preprocess_text(text):
@@ -47,31 +50,36 @@ def preprocess_text(text):
 
 collection['text_final'] = collection['text'].apply(preprocess_text)
 
-# Prepare the data for training and testing
+# Prepare for training and testing
+
 x = collection['text_final']
 y = collection['label']
 Train_X, Test_X, Train_Y, Test_Y = model_selection.train_test_split(
     x, y, test_size=0.2, random_state=1)
 
-# Word vectorization using TfidfVectorizer
+# Word vectorization 
+
 word_vector = TfidfVectorizer(max_features=5000)
 Train_X_word = word_vector.fit_transform(Train_X)
 Test_X_word = word_vector.transform(Test_X)
 
 # SVM classifier
+
 SVM = svm.SVC(C=1.0, kernel='linear', gamma='auto')
 
-# Train the model using parallel processing and GPU acceleration
+# Training the model 
 SVM.fit(Train_X_word, Train_Y, sample_weight=None)
 
-# Predict using parallel processing
+# Prediction using parallel processing
 SVM_prediction = SVM.predict(Test_X_word)
 
-# Calculate accuracy
+# Calculating accuracy score
+
 accuracy = metrics.accuracy_score(SVM_prediction, Test_Y)
 print("SVM Accuracy Score ->", accuracy * 100)
 
-# Generate confusion matrix and display it efficiently
+# plotting the confusion matrix
+
 cm = metrics.confusion_matrix(Test_Y, SVM_prediction)
 cm_display = ConfusionMatrixDisplay(
     confusion_matrix=cm, display_labels=[False, True]
