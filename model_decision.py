@@ -16,7 +16,7 @@ from sklearn.tree import DecisionTreeClassifier
 nltk.download('stopwords')
 
 # reading the dataset to pandas
-news_dataset = pd.read_csv('D:/semester 2/project id1110 s2/train.csv')
+news_dataset = pd.read_csv('/home/nalan/Documents/data_sets/train.csv')
 news_dataset.head()
 
 # checking the dimension of the data set

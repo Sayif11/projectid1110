@@ -15,7 +15,7 @@ import nltk
 
 nltk.download('stopwords')
 # reading the dataset
-news_dataset = pd.read_csv('D:/semester 2/project id1110 s2/train.csv')
+news_dataset = pd.read_csv('/home/nalan/Documents/data_sets/train.csv')
 news_dataset.head()
 
 # checking the sum of blank values in the data and filling with empty string

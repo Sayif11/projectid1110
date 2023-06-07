@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem.porter import PorterStemmer
 from sklearn.metrics import accuracy_score
 import re
-import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -13,7 +13,7 @@ from sklearn.metrics import confusion_matrix
 import joblib
 
 # Reading the news dataset from a CSV file
-news_dataset = pd.read_csv("D:/semester 2/project id1110 s2/train.csv")
+news_dataset = pd.read_csv('/home/nalan/Documents/data_sets/train.csv')
 
 # Checking for missing values in the dataset and fill them with empty string
 news_dataset.isnull().sum()
