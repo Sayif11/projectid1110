@@ -6,9 +6,9 @@ based on the paper : Characterization, Classification and Detection of Fake News
 
 
 Group participants:
-Mouhamad Sayif
-Nalan S
-Siriki Sai Tejeshwar
+Mouhamad Sayif,
+Nalan S,
+Siriki Sai Tejeshwar.
 
 
 Project details:
