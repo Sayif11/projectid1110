@@ -4,3 +4,9 @@ nltk
 sklearn
 collections
 os
+itertools
+joblib
+matplotlib
+streamlit
+re
+seaborn
