@@ -39,25 +39,17 @@ def convert_to_lowercase(content):
     return content.lower()
 
 
-def stemming(content):
-    content = remove_non_alphabetic(content)
-    content = convert_to_lowercase(content)
-    words = content.split()
-
-    stemmer = PorterStemmer()
-    processed_words = []
-
-    for word in words:
-        stemmed_word = stemmer.stem(word)
-        if stemmed_word not in stopwords.words('english'):
-            processed_words.append(stemmed_word)
-
-    content = ' '.join(processed_words)
+def preprocess(content):
+    content = re.sub('[^a-zA-Z]', ' ', content)
+    content = content.lower()
+    content = content.split()
+    content = [port_stem.stem(word) for word in content if not word in stopwords.words('english')]
+    content = ' '.join(content)
     return content
 
 
 # applying the stemmming function
-news_dataset['content'] = news_dataset['content'].apply(stemming)
+news_dataset['content'] = news_dataset['content'].apply(preprocess)
 
 
 # separating the content and the label
