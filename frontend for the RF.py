@@ -6,16 +6,10 @@ from nltk.stem.porter import PorterStemmer
 import re
 
 # Load the trained model
-loaded_model = joblib.load(
-    r'C:\Users\hp\Documents\GitHub\projectid1110\trained_model.joblib'
-)
-
+loaded_model = joblib.load('trained_model.joblib')
 
 # Load the TfidfVectorizer
-vectorizer = joblib.load(
-    r'C:\Users\hp\Documents\GitHub\projectid1110\vectorizer.joblib'
-)
-
+vectorizer = joblib.load('vectorizer.joblib')
 
 # Function to preprocess the input text
 def preprocess(content):
