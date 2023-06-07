@@ -43,9 +43,9 @@ def preprocess_text(text):
             word_final = lemmatizer.lemmatize(word, tag_map[tag[0]])
             final_words.append(word_final)
     return ' '.join(final_words)
+collection['content']= collection['author']+' '+collection['title']
 
-
-collection['text_final'] = collection['text'].apply(preprocess_text)
+collection['text_final'] = collection['content'].apply(preprocess_text)
 
 # Prepare the data for training and testing
 x = collection['text_final']
