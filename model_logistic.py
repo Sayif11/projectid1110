@@ -43,7 +43,11 @@ def preprocess(content):
     content = re.sub('[^a-zA-Z]', ' ', content)
     content = content.lower()
     content = content.split()
-    content = [port_stem.stem(word) for word in content if not word in stopwords.words('english')]
+    content = [
+        port_stem.stem(word)
+        for word in content
+        if word not in stopwords.words('english')
+    ]
     content = ' '.join(content)
     return content
 

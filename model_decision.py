@@ -49,7 +49,7 @@ def preprocess(content):
 # applying the preprocess function to the dataset
 news_dataset['content'] = news_dataset['content'].apply(preprocess)
 
-# separating the content and the label 
+# separating the content and the label
 X = news_dataset['content'].values
 Y = news_dataset['label'].values
 
