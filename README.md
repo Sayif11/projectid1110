@@ -1,4 +1,4 @@
-# Semester II project #
+# Programming Course project #
 ## Fake news detection ##
 
 Social Media has emerged as an essential medium of communication. As social media platforms have become popular, more people prefer to search for news in social media instead of conventional news sources. Although consuming news on social media offers many benefits, the absence of control and convenient access has led to the wide dissemination of fake news or misinformation.The main goal of this system is to develop a model that can distinguish between genuine (“real”) and fabricated (“fake”) news. This task is a classic text classification problem that accurately classifies news articles based on their credibility. The model is trained with 80% of the dataset and the rest is used for testing.  
